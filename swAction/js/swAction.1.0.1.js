@@ -85,22 +85,35 @@ swAction.prototype = {
 		
 	},
 	/*
+	 * 判断是否默认为透明
+	 */
+	opacity : function(i,duration,delay,opacity){
+		var name  = document.getElementsByClassName(this.id);
+		var times = delay*1000;
+		setTimeout( function(){ 
+	        //console.log(i);
+	        name[i].style = 'animation-duration:'+duration+'s; animation-delay:'+delay+'s; opacity:1';
+	    }, times );
+	},
+	/*
 	 * 处理事件
 	 */
     action : function(){
     	var height = this.getScrollTop() + this.getClientHeight();
     	var name   = document.getElementsByClassName(this.id);
     	for(var i=0; i<name.length; i++) {
-			//this.addClass(name[i], 'opacity');
 			var top = this.offTop(name[i]);
-	        if (top < height) {
-	            //this.removeClass(name[i], 'opacity');
+	        if (top < height) { 
 	            var effect    = name[i].getAttribute('swAction-effect');
 	            var duration  = name[i].getAttribute('swAction-duration');
 	            var delay     = name[i].getAttribute('swAction-delay');
+	            var opacity   = name[i].getAttribute('swAction-opacity');
 	            var nameArr   = name[i].getAttribute('class');
 	            this.addClass(name[i], effect);
-	            name[i].style = 'animation-duration:'+duration+'; animation-delay:'+delay; 
+	            if(opacity){
+	            	name[i].style = 'opacity:0';
+	            }
+	            this.opacity(i,duration,delay,opacity);
 	        }
 		}
     }
