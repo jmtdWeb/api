@@ -37,7 +37,7 @@ swAction.prototype = {
 	 */
     hasClass : function (ele, cls){
 		cls = cls || '';
-		if (cls.replace(/\s/g, '').length == 0) return false; //当cls没有参数时，返回false
+		if (cls.replace(/\s/g, '').length == 0) return false;
 		return new RegExp(' ' + cls + ' ').test(' ' + ele.className + ' ');
 	},
     /*
@@ -61,8 +61,6 @@ swAction.prototype = {
 		}
 	},
 	/*
-	 * 计算div到达顶部距离
-	 * 不准，jq的.offset().top也不准
 	 * 进入a，a里面执行b，b返回，然后a并没有返回
 	 * 所以，console.log(a());不会有任何东西
 	 * function a(){
