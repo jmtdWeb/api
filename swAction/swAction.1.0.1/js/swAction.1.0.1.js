@@ -93,6 +93,7 @@ swAction.prototype = {
 		setTimeout( function(){ 
 	        //console.log(i);
 	        name[i].style = 'animation-duration:'+duration+'s; animation-delay:'+delay+'s; opacity:1';
+	        name[i].setAttribute('swAction-data','1');
 	    }, times );
 	},
 	/*
@@ -108,12 +109,15 @@ swAction.prototype = {
 	            var duration  = name[i].getAttribute('swAction-duration');
 	            var delay     = name[i].getAttribute('swAction-delay');
 	            var opacity   = name[i].getAttribute('swAction-opacity');
+	            var data      = name[i].getAttribute('swAction-data');
 	            var nameArr   = name[i].getAttribute('class');
-	            this.addClass(name[i], effect);
-	            if(opacity){
-	            	name[i].style = 'opacity:0';
+	            if(data != 1){
+		            this.addClass(name[i], effect);
+		            if(opacity){
+		            	name[i].style = 'opacity:'+opacity;
+		            }
+		            this.opacity(i,duration,delay,opacity);
 	            }
-	            this.opacity(i,duration,delay,opacity);
 	        }
 		}
     }
